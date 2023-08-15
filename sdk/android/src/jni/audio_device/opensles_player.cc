@@ -317,9 +317,9 @@ bool OpenSLESPlayer::CreateAudioPlayer() {
       player_object_->GetInterface(player_object_.Get(),
                                    SL_IID_ANDROIDCONFIGURATION, &player_config),
       false);
-  // Set audio player configuration to SL_ANDROID_STREAM_VOICE which
-  // corresponds to android.media.AudioManager.STREAM_VOICE_CALL.
-  SLint32 stream_type = SL_ANDROID_STREAM_VOICE;
+  // Set audio player configuration to SL_ANDROID_STREAM_MEDIA which
+  // corresponds to android.media.AudioManager.STREAM_MUSIC.
+  SLint32 stream_type = SL_ANDROID_STREAM_MEDIA;
   RETURN_ON_ERROR(
       (*player_config)
           ->SetConfiguration(player_config, SL_ANDROID_KEY_STREAM_TYPE,
@@ -355,7 +355,7 @@ bool OpenSLESPlayer::CreateAudioPlayer() {
 
   // TODO(henrika): might not be required to set volume to max here since it
   // seems to be default on most devices. Might be required for unit tests.
-  // RETURN_ON_ERROR((*volume_)->SetVolumeLevel(volume_, 0), false);
+  RETURN_ON_ERROR((*volume_)->SetVolumeLevel(volume_, 0), false);
 
   return true;
 }

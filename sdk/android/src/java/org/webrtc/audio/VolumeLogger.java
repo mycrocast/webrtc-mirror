@@ -43,8 +43,8 @@ class VolumeLogger {
     Logging.d(TAG, "audio mode is: " + WebRtcAudioUtils.modeToString(audioManager.getMode()));
 
     timer = new Timer(THREAD_NAME);
-    timer.schedule(new LogVolumeTask(audioManager.getStreamMaxVolume(AudioManager.STREAM_RING),
-                       audioManager.getStreamMaxVolume(AudioManager.STREAM_VOICE_CALL)),
+    timer.schedule(new LogVolumeTask(audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC),
+                       audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)),
         0, TIMER_PERIOD_IN_SECONDS * 1000);
   }
 
@@ -62,7 +62,7 @@ class VolumeLogger {
       final int mode = audioManager.getMode();
       if (mode == AudioManager.MODE_RINGTONE) {
         Logging.d(TAG,
-            "STREAM_RING stream volume: " + audioManager.getStreamVolume(AudioManager.STREAM_RING)
+            "STREAM_MUSIC stream volume: " + audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
                 + " (max=" + maxRingVolume + ")");
       } else if (mode == AudioManager.MODE_IN_COMMUNICATION) {
         Logging.d(TAG,
